@@ -19,6 +19,7 @@ namespace VsMusic
             RecursiveHendlerHover(areaVolumeControl);
 
             volumeControl.MouseWheel += VolumeControl_MouseWheel;
+            Value = 50;
         }
 
         public event EventHandler ChangeVolume;
@@ -45,7 +46,7 @@ namespace VsMusic
         #endregion
 
 
-        public float Value { get; set; }
+        public float Value { get; set; } 
         float currentValue = 50;
         private void volumeControl_MouseClick(object sender, MouseEventArgs e)
         {

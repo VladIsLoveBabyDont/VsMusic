@@ -55,6 +55,7 @@ namespace VsMusic
                 play = false;
             }
             _wavePlayer = new WaveOut();
+            _wavePlayer.PlaybackStopped += OnPlaybackStopped;
             _audioFileReader = new AudioFileReader(path);
             _wavePlayer.Init(_audioFileReader);
             _wavePlayer.Play();
@@ -63,6 +64,13 @@ namespace VsMusic
             playPause.ButtonImage = Properties.Resources.pause;
             play = true;
 
+        }
+        private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
+        {
+            _wavePlayer.Dispose();
+            _audioFileReader.Dispose();
+
+            PlayNext.Invoke(sender, e);
         }
 
         private void audioTime_Tick(object sender, EventArgs e)
